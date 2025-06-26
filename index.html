@@ -163,38 +163,3 @@
   </footer>
 </body>
 </html>
-// index.js
-const express = require('express');
-const cors = require('cors');
-const { Configuration, OpenAIApi } = require('openai');
-require('dotenv').config();
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-app.post('/api/chat', async (req, res) => {
-  const userMessage = req.body.message;
-
-  try {
-    const completion = await openai.createChatCompletion({
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: userMessage }],
-    });
-
-    const respuesta = completion.data.choices[0].message.content;
-    res.json({ response: respuesta });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error al generar respuesta de la IA' });
-  }
-});
-
-app.listen(3000, () => console.log('Servidor corriendo en puerto 3000'));
-.env
-
