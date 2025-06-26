@@ -7,6 +7,118 @@
   <meta name="keywords" content="inteligencia artificial, IA, chat IA, generador de imágenes, herramientas IA, web IA">
   <title>IA Interactiva: Herramientas Inteligentes para Todos</title>
   <link rel="stylesheet" href="estilo.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      color: #f0f0f0;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      color: #00ffc8;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    nav ul li a {
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #00ffc8;
+    }
+
+    .seccion {
+      padding: 60px 20px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.05);
+      margin: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .seccion h2 {
+      color: #00ffc8;
+      margin-bottom: 10px;
+    }
+
+    .seccion p {
+      font-size: 1.1em;
+    }
+
+    .seccion input, .seccion textarea {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+    }
+
+    .seccion button {
+      background-color: #00ffc8;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #00332e;
+      transition: background-color 0.3s;
+    }
+
+    .seccion button:hover {
+      background-color: #00dab3;
+    }
+
+    #respuestaIA, #imagenGenerada, #audioIA {
+      margin-top: 20px;
+      font-size: 1.1em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      font-size: 0.9em;
+    }
+  </style>
+  <script>
+    async function enviarMensajeIA() {
+      const mensaje = document.getElementById('inputChat').value;
+      const respuesta = document.getElementById('respuestaIA');
+      respuesta.textContent = 'Procesando...';
+      try {
+        const res = await fetch('https://tu-backend.repl.co/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: mensaje })
+        });
+        const data = await res.json();
+        respuesta.textContent = data.response;
+      } catch (error) {
+        respuesta.textContent = 'Error al contactar con la IA';
+      }
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -23,20 +135,26 @@
   <main>
     <section id="chat" class="seccion">
       <h2>Chat Inteligente</h2>
-      <p>Habla con una IA que responde en tiempo real. (Próximamente)</p>
-      <button onclick="alert('Función en desarrollo')">Probar Chat</button>
+      <p>Habla con nuestra IA ahora mismo:</p>
+      <textarea id="inputChat" rows="4" placeholder="Escribe tu mensaje..."></textarea><br>
+      <button onclick="enviarMensajeIA()">Enviar</button>
+      <div id="respuestaIA"></div>
     </section>
 
     <section id="imagenes" class="seccion">
       <h2>Generador de Imágenes IA</h2>
-      <p>Transforma texto en imágenes sorprendentes. (Próximamente)</p>
-      <button onclick="alert('Función en desarrollo')">Probar Generador</button>
+      <p>Transforma tus ideas en imágenes (pendiente de integración con backend)</p>
+      <input type="text" placeholder="Describe la imagen que quieres generar"><br>
+      <button disabled>Generar Imagen</button>
+      <div id="imagenGenerada"></div>
     </section>
 
     <section id="voz" class="seccion">
       <h2>Texto a Voz con IA</h2>
-      <p>Convierte texto en voz natural. (Próximamente)</p>
-      <button onclick="alert('Función en desarrollo')">Probar Voz</button>
+      <p>Convierte texto en voz natural (pendiente de integración con backend)</p>
+      <textarea rows="3" placeholder="Escribe el texto que quieras oír"></textarea><br>
+      <button disabled>Reproducir Voz</button>
+      <div id="audioIA"></div>
     </section>
   </main>
 
