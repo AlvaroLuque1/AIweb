@@ -3,169 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Explora herramientas interactivas de Inteligencia Artificial: Chatbots, Generación de Imágenes y más">
-  <meta name="keywords" content="inteligencia artificial, IA, chat IA, generador de imágenes, herramientas IA, web IA">
-  <title>IA Interactiva: Herramientas Inteligentes para Todos</title>
+  <title>IA Multitool</title>
   <link rel="stylesheet" href="estilo.css">
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      background-color: #0f172a;
       color: #f0f0f0;
     }
-
-    header {
-      background-color: rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      text-align: center;
+    nav {
+      background-color: #111827;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-
-    header h1 {
+    nav h1 {
       margin: 0;
-      font-size: 2em;
+      font-size: 1.5rem;
       color: #00ffc8;
     }
-
     nav ul {
       list-style: none;
-      padding: 0;
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 10px;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
     }
-
     nav ul li a {
-      color: #ffffff;
+      color: #f0f0f0;
       text-decoration: none;
       font-weight: bold;
       transition: color 0.3s;
     }
-
     nav ul li a:hover {
       color: #00ffc8;
     }
-
-    .seccion {
+    .section-preview {
       padding: 60px 20px;
       text-align: center;
-      background-color: rgba(255, 255, 255, 0.05);
-      margin: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
-
-    .seccion h2 {
+    .section-preview h2 {
       color: #00ffc8;
-      margin-bottom: 10px;
     }
-
-    .seccion p {
-      font-size: 1.1em;
-    }
-
-    .seccion input, .seccion textarea {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-      font-size: 1em;
-    }
-
-    .seccion button {
-      background-color: #00ffc8;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1em;
-      border-radius: 8px;
-      cursor: pointer;
-      color: #00332e;
-      transition: background-color 0.3s;
-    }
-
-    .seccion button:hover {
-      background-color: #00dab3;
-    }
-
-    #respuestaIA, #imagenGenerada, #audioIA {
-      margin-top: 20px;
-      font-size: 1.1em;
-    }
-
-    footer {
-      text-align: center;
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
-      font-size: 0.9em;
+    }
+    .card {
+      background: #1f2937;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      width: 280px;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #00ffc8;
+    }
+    .card p {
+      font-size: 0.95em;
+    }
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      color: #00ffc8;
+      text-decoration: none;
+      font-weight: bold;
     }
   </style>
-  <script>
-    async function enviarMensajeIA() {
-      const mensaje = document.getElementById('inputChat').value;
-      const respuesta = document.getElementById('respuestaIA');
-      respuesta.textContent = 'Procesando...';
-      try {
-        const res = await fetch('https://tu-backend.repl.co/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: mensaje })
-        });
-        const data = await res.json();
-        respuesta.textContent = data.response;
-      } catch (error) {
-        respuesta.textContent = 'Error al contactar con la IA';
-      }
-    }
-  </script>
 </head>
 <body>
-  <header>
-    <h1>IA Interactiva: Herramientas Inteligentes para Todos</h1>
-    <nav>
-      <ul>
-        <li><a href="#chat">Chat IA</a></li>
-        <li><a href="#imagenes">Generador de Imágenes</a></li>
-        <li><a href="#voz">Texto a Voz</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav>
+    <h1>IA Multitool</h1>
+    <ul>
+      <li><a href="/chat.html">Chat IA</a></li>
+      <li><a href="/imagenes.html">Generador de Imágenes</a></li>
+      <li><a href="/voz.html">Texto a Voz</a></li>
+      <li><a href="/datos.html">Análisis de Datos</a></li>
+      <li><a href="/creador.html">Creador de Marca</a></li>
+      <li><a href="/educacion.html">Asistente Educativo</a></li>
+    </ul>
+  </nav>
 
-  <main>
-    <section id="chat" class="seccion">
-      <h2>Chat Inteligente</h2>
-      <p>Habla con nuestra IA ahora mismo:</p>
-      <textarea id="inputChat" rows="4" placeholder="Escribe tu mensaje..."></textarea><br>
-      <button onclick="enviarMensajeIA()">Enviar</button>
-      <div id="respuestaIA"></div>
-    </section>
-
-    <section id="imagenes" class="seccion">
-      <h2>Generador de Imágenes IA</h2>
-      <p>Transforma tus ideas en imágenes (pendiente de integración con backend)</p>
-      <input type="text" placeholder="Describe la imagen que quieres generar"><br>
-      <button disabled>Generar Imagen</button>
-      <div id="imagenGenerada"></div>
-    </section>
-
-    <section id="voz" class="seccion">
-      <h2>Texto a Voz con IA</h2>
-      <p>Convierte texto en voz natural (pendiente de integración con backend)</p>
-      <textarea rows="3" placeholder="Escribe el texto que quieras oír"></textarea><br>
-      <button disabled>Reproducir Voz</button>
-      <div id="audioIA"></div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 IA Interactiva. Proyecto en desarrollo.</p>
-  </footer>
+  <section class="section-preview">
+    <h2>Explora nuestras herramientas inteligentes</h2>
+    <div class="card-container">
+      <div class="card">
+        <h3>Chat IA</h3>
+        <p>Conversaciones inteligentes para ayudarte con cualquier tema.</p>
+        <a href="/chat.html">Probar ahora</a>
+      </div>
+      <div class="card">
+        <h3>Generador de Imágenes</h3>
+        <p>Convierte tus ideas en arte visual con IA.</p>
+        <a href="/imagenes.html">Probar ahora</a>
+      </div>
+      <div class="card">
+        <h3>Texto a Voz</h3>
+        <p>Escucha tus textos con voz natural impulsada por IA.</p>
+        <a href="/voz.html">Probar ahora</a>
+      </div>
+      <div class="card">
+        <h3>Análisis de Datos</h3>
+        <p>Sube archivos y obtén insights inteligentes.</p>
+        <a href="/datos.html">Probar ahora</a>
+      </div>
+      <div class="card">
+        <h3>Creador de Marca</h3>
+        <p>Genera nombres, logos y descripciones para tu negocio.</p>
+        <a href="/creador.html">Probar ahora</a>
+      </div>
+      <div class="card">
+        <h3>Asistente Educativo</h3>
+        <p>Explicaciones y ayuda para estudiantes de cualquier nivel.</p>
+        <a href="/educacion.html">Probar ahora</a>
+      </div>
+    </div>
+  </section>
 </body>
 </html>
-git init
-git add .
-git commit -m "Backend funcional con ChatGPT"
-git branch -M main
-git remote add origin https://github.com/AlvaroLuque1/chatgpt-backend.git
-git push -u origin main
